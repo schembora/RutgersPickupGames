@@ -31,12 +31,12 @@ if (Meteor.isClient) {
         Meteor.logout();
     	}
 	});
-    Template.dashboard.events({
+    Template.createGame.events({
     'event form': function(event){
         event.preventDefault();
-	var sportVar = event.target.sport.value;
+	var sportVar = $('input[name="group1"]:checked').val();
 	var dateVar = event.target.date.value;
 	var timeVar = event.target.time.value;
-	var eventIdVar = event.target.eventId.value;
-	Event.insert({ sport: sportVar, date: dateVar, time: timeVar, id: eventIdVar});
+	var locVar = event.target.loc.value;
+	Events.insert({ sport: sportVar, date: dateVar, time: timeVar, loc: locVar});
 }
