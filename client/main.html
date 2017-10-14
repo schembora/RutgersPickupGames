@@ -1,25 +1,60 @@
 <head>
-  <title>rutgerspickup</title>
+    <title>Custom Registration Tutorial</title>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 </head>
-
 <body>
-  <h1>Welcome to Meteor!</h1>
+    {{#if currentUser}}
+        {{> dashboard}}
+    {{else}}
+        {{> register}}
+        {{> login}}
+    {{/if}}
 
-  {{> hello}}
-  {{> info}}
+ 
+        
+
+
+
 </body>
-
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="register">
+<form>
+    <div class="row">
+    <div class="input-field col s6">
+      <input  name="registerEmail" type="email" class="validate">
+      <label class="active" for="regsiterEmail">Email Address</label>  
+    </div>
+    <div class="input-field col s6">
+        <input  name="registerPassword" type="password" class="validate">
+        <label class="active" for="registerPassword">Password</label>
+       
+    </div>
+  </div>
+   <input type="submit" value="Register">
+</form>
+</template>
+<template name="login">
+<form>
+    <div class="row">
+    <div class="input-field col s6">
+      <input  name="loginEmail" type="email" class="validate">
+      <label class="active" for="loginEmail">Email Address</label>  
+    </div>
+    <div class="input-field col s6">
+        <input  name="loginPassword" type="password" class="validate">
+        <label class="active" for="loginPassword">Password</label>
+       
+    </div>
+  </div>
+   <input type="submit" value="Login">
+</form>
 </template>
 
-<template name="info">
-  <h2>Learn Meteor!</h2>
-  <ul>
-    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
-    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
-    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
-    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
-  </ul>
+
+<template name="dashboard">
+    <p>You're logged in.</p>
+    <p><a href="#" class="logout">Logout</a></p>
 </template>
