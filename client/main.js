@@ -1,10 +1,11 @@
 import { Meteor } from 'meteor/meteor'
-import { Template } from 'meteor/templating';
-
+import { Template } from 'meteor/templating'
+import { Mongo } from 'meteor/mongo';
 import './main.html';
 
 
 if (Meteor.isClient) {
+    Event = new Mongo.Collection("event");
     Template.register.events({
     'submit form': function(event) {
         event.preventDefault();
@@ -30,4 +31,12 @@ if (Meteor.isClient) {
         Meteor.logout();
     	}
 	});
+    Template.dashboard.events({
+    'event form': function(event){
+        event.preventDefault();
+	var sportVar = event.target.sport.value;
+	var dateVar = event.target.date.value;
+	var timeVar = event.target.time.value;
+	var eventIdVar = event.target.eventId.value;
+	Event.insert({ sport: sportVar, date: dateVar, time: timeVar, id: eventIdVar});
 }
