@@ -14,6 +14,7 @@
     {{#if currentUser}}
         {{> dashboard}}
         {{> createGame}}
+        {{> displayTable}}
     {{else}}
         {{> register}}
         {{> login}}
@@ -64,23 +65,23 @@
    <form action="#">
       <h4> Pick the Sport </h4>
       <p>
-        <input name="group1" type="radio" id="soccer" />
+        <input name="group1" type="radio" id="soccer" value ="soccer" />
         <label for="soccer">Soccer</label>
       </p>
       <p>
-        <input name="group1" type="radio" id="basketball" />
+        <input name="group1" type="radio" id="basketball" value ="basketball"/>
         <label for="basketball">Basketball</label>
       </p>
       <p>
-        <input name="group1" type="radio" id="ultimate"  />
+        <input name="group1" type="radio" id="ultimate"  value ="ultimate"/>
         <label for="ultimate">Ultimate</label>
       </p>
       <p>
-        <input name="group1" type="radio" id="football" />
+        <input name="group1" type="radio" id="football" value ="football"/>
         <label for="football">Football</label>
       </p>
       <h4> Pick the Date and Time </h4>
-      <input type="text" class="datepicker" id="date">
+      <input type="text" class="datepicker" name="date">
       <script> 
         $('.datepicker').pickadate({
       selectMonths: true, // Creates a dropdown to control month
@@ -91,7 +92,7 @@
       closeOnSelect: false // Close upon selecting a date,
     });
     </script>
-      <input type="text" class="timepicker" id="time">
+      <input type="text" class="timepicker" name="time">
       <script>
       $('.timepicker').pickatime({
       default: 'now', // Set default time: 'now', '1:30AM', '16:30'
@@ -106,11 +107,26 @@
     });
     </script>
     <h4> Location </h4>
-      <input placeholder="Address" id="loc" type="text" class="validate">
-      <button class="btn waves-effect waves-light" value="Submit">Submit
+      <input placeholder="Address" name="loc" type="text" class="validate">
+      <button class="btn waves-effect waves-light" type=submit value="Submit">Submit
       </button>
     </form>
 </div>
 
 
+</template>
+<template name ='displayTable'>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Sport</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Location</th>
+        <th>Join?</th>
+      </tr>
+    </thead>
+    <tbody id='tableBody'>
+    </tbody>
+  </table>
 </template>
