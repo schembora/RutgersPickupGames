@@ -1,24 +1,23 @@
 <head>
-    <title>Custom Registration Tutorial</title>
+    <title>Login|Register</title>
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 
   <!-- Compiled and minified JavaScript -->
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 </head>
 <body>
     {{#if currentUser}}
         {{> dashboard}}
+        {{> createGame}}
     {{else}}
         {{> register}}
         {{> login}}
     {{/if}}
-
- 
-        
-
-
-
 </body>
 <template name="register">
 <form>
@@ -33,7 +32,8 @@
        
     </div>
   </div>
-   <input type="submit" value="Register">
+   <button class="btn waves-effect waves-light" value="Login">Register
+  </button>
 </form>
 </template>
 <template name="login">
@@ -49,12 +49,68 @@
        
     </div>
   </div>
-   <input type="submit" value="Login">
+   <button class="btn waves-effect waves-light" value="Login">Login
+  </button>
 </form>
 </template>
-
-
 <template name="dashboard">
-    <p>You're logged in.</p>
+    <h1 class='header center orange-text'> Your Dasboard </h1>
     <p><a href="#" class="logout">Logout</a></p>
+</template>
+
+<template name="createGame">
+  <div id='createGame'>
+    <h2 class='header'> Create a Pickup Game </h2>
+   <form action="#">
+      <h4> Pick the Sport </h4>
+      <p>
+        <input name="group1" type="radio" id="soccer" />
+        <label for="soccer">Soccer</label>
+      </p>
+      <p>
+        <input name="group1" type="radio" id="basketball" />
+        <label for="basketball">Basketball</label>
+      </p>
+      <p>
+        <input name="group1" type="radio" id="ultimate"  />
+        <label for="ultimate">Ultimate</label>
+      </p>
+      <p>
+        <input name="group1" type="radio" id="football" />
+        <label for="football">Football</label>
+      </p>
+      <h4> Pick the Date and Time </h4>
+      <input type="text" class="datepicker" id="date">
+      <script> 
+        $('.datepicker').pickadate({
+      selectMonths: true, // Creates a dropdown to control month
+      selectYears: 15, // Creates a dropdown of 15 years to control year,
+      today: 'Today',
+      clear: 'Clear',
+      close: 'Ok',
+      closeOnSelect: false // Close upon selecting a date,
+    });
+    </script>
+      <input type="text" class="timepicker" id="time">
+      <script>
+      $('.timepicker').pickatime({
+      default: 'now', // Set default time: 'now', '1:30AM', '16:30'
+      fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
+      twelvehour: true, // Use AM/PM or 24-hour format
+      donetext: 'OK', // text for done-button
+      cleartext: 'Clear', // text for clear-button
+      canceltext: 'Cancel', // Text for cancel-button
+      autoclose: false, // automatic close timepicker
+      ampmclickable: true, // make AM PM clickable
+      aftershow: function(){} //Function for after opening timepicker
+    });
+    </script>
+    <h4> Location </h4>
+      <input placeholder="Address" id="location" type="text" class="validate">
+      <button class="btn waves-effect waves-light" value="Submit">Submit
+      </button>
+    </form>
+</div>
+
+
 </template>
