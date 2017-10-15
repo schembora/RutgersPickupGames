@@ -41,7 +41,6 @@ if (Meteor.isClient) {
 		var locVar = event.target.loc.value;
 		var numPlayersVar = event.target.numOfPlayers.value;
 		Events.insert({ sport: sportVar, date: dateVar, time: timeVar, loc: locVar, initialNumPlayers: 1, numPlayers: numPlayersVar});
-		console.log(Events.find({}).fetch());
 		location.reload();
 		}
 	});
@@ -51,9 +50,16 @@ if (Meteor.isClient) {
 		for(var x = 0; x < arr.length; x++){
 			$("#tableBody").append("<tr> <td>" + arr[x]['sport'] + "</td><td>" + arr[x]['date'] + "</td><td>" + 
 				arr[x]['time'] + "</td><td>" + arr[x]['loc'] + " </td> <td>" + "" + arr[x]['initialNumPlayers'] + "/" + arr[x]['numPlayers'] +
-				"</td><td> <button class='btn waves-effect waves-light'> Join </button></td></tr>");
+				"</td><td> <button id= "+arr[x]['_id'] +" class='btn waves-effect waves-light'> Join </button></td></tr>");
 		}
 
+	});
+	Template.displayTable.events({
+		'click .btn': function(event){
+			event.preventDefault();
+			var id = event.target.id
+			Events.update( {_id: id}, {$set:{initialNumPlayers: Events.find({ _id: id }).fetch()[0]['initialNumPlayers'] + 1}});
+		}
 	});
 
 }
