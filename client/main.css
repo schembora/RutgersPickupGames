@@ -1,4 +1,22 @@
 /* CSS declarations go here */
 #createGame{
 	margin-left:50%;
+	font-size:100%;
+
+}
+#createGame h4,h2,h3{
+	font-size:80%;
+}
+
+#games {
+	width: 48%;
+	position: relative;
+	top: -650px;
+}
+h1{
+	color: #26a69a;
+}
+hr{
+	width:80%;
+	border-color: #26a69a;;
 }

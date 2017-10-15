@@ -1,5 +1,5 @@
 <head>
-    <title>Login|Register</title>
+    <title>Rutgers Pick Up</title>
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 
@@ -21,6 +21,7 @@
     {{/if}}
 </body>
 <template name="register">
+<h1 id='loginHeader' class='header center'> Rutgers Pick-Up Games </h1>
 <form>
     <div class="row">
     <div class="input-field col s6">
@@ -33,8 +34,10 @@
        
     </div>
   </div>
+  <div class="center-align">
    <button class="btn waves-effect waves-light" value="Login">Register
   </button>
+  </div>
 </form>
 </template>
 <template name="login">
@@ -50,13 +53,16 @@
        
     </div>
   </div>
+  <div class="center-align">
    <button class="btn waves-effect waves-light" value="Login">Login
   </button>
+  </div>
 </form>
 </template>
 <template name="dashboard">
-    <h1 class='header center orange-text'> Your Dasboard </h1>
-    <p><a href="#" class="logout">Logout</a></p>
+    <h1 class='header center '> Rutgers Pick-Up Games </h1>
+    <hr>
+    <button class="logout">Logout</button>
 </template>
 
 <template name="createGame">
@@ -108,14 +114,16 @@
     </script>
     <h4> Location </h4>
       <input placeholder="Address" name="loc" type="text" class="validate">
-      <button class="btn waves-effect waves-light" type=submit value="Submit">Submit
-      </button>
+    <h4> Number of Players </h4>
+      <input placeholder="Number of Players" name="numOfPlayers" type="number" class="validate">
+      <button class="btn waves-effect waves-light" type=submit value="Submit">Submit</button>
     </form>
 </div>
 
 
 </template>
 <template name ='displayTable'>
+ <div id="games">
   <table class="table">
     <thead>
       <tr>
@@ -123,10 +131,12 @@
         <th>Date</th>
         <th>Time</th>
         <th>Location</th>
+        <th>Players</th>
         <th>Join?</th>
       </tr>
     </thead>
     <tbody id='tableBody'>
     </tbody>
   </table>
+ </div>
 </template>

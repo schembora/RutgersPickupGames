@@ -39,7 +39,8 @@ if (Meteor.isClient) {
 		console.log(dateVar);
 		var timeVar = event.target.time.value;
 		var locVar = event.target.loc.value;
-		Events.insert({ sport: sportVar, date: dateVar, time: timeVar, loc: locVar});
+		var numPlayersVar = event.target.numOfPlayers.value;
+		Events.insert({ sport: sportVar, date: dateVar, time: timeVar, loc: locVar, initialNumPlayers: 1, numPlayers: numPlayersVar});
 		console.log(Events.find({}).fetch());
 		location.reload();
 		}
@@ -48,7 +49,9 @@ if (Meteor.isClient) {
 		var arr = Events.find({}).fetch();
 		console.log(arr[0]);
 		for(var x = 0; x < arr.length; x++){
-			$("#tableBody").append("<tr> <td>" + arr[x]['sport'] + "</td><td>" + arr[x]['date'] + "</td><td>" + arr[x]['time'] + "</td><td>" + arr[x]['loc'] + "</td></tr>");
+			$("#tableBody").append("<tr> <td>" + arr[x]['sport'] + "</td><td>" + arr[x]['date'] + "</td><td>" + 
+				arr[x]['time'] + "</td><td>" + arr[x]['loc'] + " </td> <td>" + "" + arr[x]['initialNumPlayers'] + "/" + arr[x]['numPlayers'] +
+				"</td><td> <button class='btn waves-effect waves-light'> Join </button></td></tr>");
 		}
 
 	});
