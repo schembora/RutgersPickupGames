@@ -40,25 +40,46 @@ if (Meteor.isClient) {
 		var timeVar = event.target.time.value;
 		var locVar = event.target.loc.value;
 		var numPlayersVar = event.target.numOfPlayers.value;
-		Events.insert({ sport: sportVar, date: dateVar, time: timeVar, loc: locVar, initialNumPlayers: 1, numPlayers: numPlayersVar});
+		var userIdsVar = Array();
+		userIdsVar.push(Meteor.userId());
+		Events.insert({ sport: sportVar, date: dateVar, time: timeVar, loc: locVar, initialNumPlayers: 1, numPlayers: numPlayersVar, userIds: userIdsVar});
 		location.reload();
 		}
 	});
 	Template.displayTable.onRendered(function(){
 		var arr = Events.find({}).fetch();
-		console.log(arr[0]);
+		var txtButton;
 		for(var x = 0; x < arr.length; x++){
+			if (arr[x]['userIds'].includes(Meteor.userId())){
+				txtButton = "<button id= "+arr[x]['_id'] +" class='btn leave waves-effect waves-red'> Leave </button>";
+			}
+			else{txtButton = "<button id= "+arr[x]['_id'] +" class='btn join waves-effect waves-light'> Join </button>";}
 			$("#tableBody").append("<tr> <td>" + arr[x]['sport'] + "</td><td>" + arr[x]['date'] + "</td><td>" + 
 				arr[x]['time'] + "</td><td>" + arr[x]['loc'] + " </td> <td>" + "" + arr[x]['initialNumPlayers'] + "/" + arr[x]['numPlayers'] +
-				"</td><td> <button id= "+arr[x]['_id'] +" class='btn waves-effect waves-light'> Join </button></td></tr>");
+				"</td><td>" + txtButton + "</td></tr>");
 		}
 
 	});
 	Template.displayTable.events({
-		'click .btn': function(event){
+		'click .join': function(event){
 			event.preventDefault();
 			var id = event.target.id
+			var temp = Events.find({_id: id}).fetch()[0]['userIds']
+			temp.push(Meteor.userId());
 			Events.update( {_id: id}, {$set:{initialNumPlayers: Events.find({ _id: id }).fetch()[0]['initialNumPlayers'] + 1}});
+			Events.update( {_id: id}, {$set:{userIds: temp}});
+			location.reload();
+		}
+	});
+	Template.displayTable.events({
+		'click .leave': function(event){
+			event.preventDefault();
+			var id = event.target.id
+			var temp = Events.find({_id: id}).fetch()[0]['userIds']
+			temp.splice(temp.indexOf(Meteor.userId()),1);
+			Events.update( {_id: id}, {$set:{initialNumPlayers: Events.find({ _id: id }).fetch()[0]['initialNumPlayers'] - 1}});
+			Events.update( {_id: id}, {$set:{userIds: temp}});
+			location.reload();
 		}
 	});
 

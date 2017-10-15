@@ -20,3 +20,7 @@ hr{
 	width:80%;
 	border-color: #26a69a;;
 }
+button.leave{
+	background-color: #00e676;
+	color:white;
+}
